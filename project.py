@@ -14,7 +14,6 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL", "openai/gpt-4o-mini").strip()
 # Initialize database on startup
 initialize_database()
 
-
 def build_system_prompt():
 		faq_items = get_faqs()
 		faq_text = "\n".join([f"- {item['q']}" for item in faq_items])
@@ -113,4 +112,4 @@ This is a comprehensive {program['category'].lower()} program designed to provid
 
 
 if __name__ == "__main__":
-		app.run(debug=True, port=5000)
+		app.run(debug=True, host="0.0.0.0", port=5000)
