@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>College Chatbot</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="nav-container">
+				<div class="nav-logo">🤖 AGC College</div>
+				<ul class="nav-menu">
+					<li>
+						<a href="https://www.google.com/maps?q=QGW7%2B9RF,+Hathikhana,+Bettiah,+Bihar+845438" target="_blank" class="nav-link" style="display:flex;align-items:center;padding:0 8px;">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;">
+								<circle cx="12" cy="12" r="10" fill="#4285F4"/>
+								<path d="M12 7a5 5 0 0 1 5 5c0 2.5-2.5 6-5 8.5C9.5 18 7 14.5 7 12a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3c0 1.5 1.5 4 3 5.5 1.5-1.5 3-4 3-5.5a3 3 0 0 0-3-3zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="#fff"/>
+							</svg>
+						</a>
+					</li>
+					<li><a href="#" class="nav-link" id="askMeLink">Ask Me</a></li>
+					<li><a href="#" class="nav-link">About</a></li>
+				<li class="nav-item-dropdown">
+					<a href="#" class="nav-link">Programs</a>
+					<ul class="dropdown-menu">
+						<li class="nav-item-dropdown submenu-parent">
+							<a href="#" class="dropdown-link">Undergraduate</a>
+							<ul class="dropdown-menu submenu">
+								<li><a href="#" class="dropdown-link program-option" data-program="Bachelor's of Computer Applications">Bachelor's of Computer Applications</a></li>
+								<li><a href="#" class="dropdown-link program-option" data-program="Bachelor's of Commerce">Bachelor's of Commerce</a></li>
+								<li><a href="#" class="dropdown-link program-option" data-program="Bachelor's of Business Administration">Bachelor's of Business Administration</a></li>
+								<li><a href="#" class="dropdown-link program-option" data-program="Bachelor's of BA-Aviation Management">Bachelor's of BA-Aviation Management</a></li>
+							</ul>
+						</li>
+						<li class="nav-item-dropdown submenu-parent">
+							<a href="#" class="dropdown-link">Postgraduate</a>
+							<ul class="dropdown-menu submenu">
+								<li><a href="#" class="dropdown-link program-option" data-program="Master's in Computer Applications">Master's in Computer Applications</a></li>
+								<li><a href="#" class="dropdown-link program-option" data-program="Master's in Commerce">Master's in Commerce</a></li>
+								<li><a href="#" class="dropdown-link program-option" data-program="Master's in Business Administrations">Master's in Business Administrations</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="nav-item-dropdown">
+					<a href="#" class="nav-link">Admissions</a>
+					<ul class="dropdown-menu">
+						<li><a href="#" class="dropdown-link admissions-option" data-question="Admission process">Admission Process</a></li>
+						<li><a href="#" class="dropdown-link admissions-option" data-question="Candidate criterias">Candidate Criterias</a></li>
+						<li><a href="#" class="dropdown-link admissions-option" data-question="Test process">Test Process</a></li>
+						<li><a href="#" class="dropdown-link admissions-option" data-question="Selection criterias">Selection Criterias</a></li>
+					</ul>
+				</li>
+				<li class="nav-item-dropdown">
+					<a href="#" class="nav-link">Contact</a>
+					<ul class="dropdown-menu">
+						<li><a href="mailto:info.agcc@gmail.com?subject=College%20Inquiry" class="dropdown-link">Email Us</a></li>
+						<li><a href="tel:7491830049" class="dropdown-link">Call Us</a></li>
+					</ul>
+				</li>
+			</ul>
+			<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+				<span class="theme-icon">🌙</span>
+			</button>
+			</div>
+		</nav>
+		<div class="noise"></div>
+		<header>
+			<div>
+			<h1>Hi,  I'm Alex, your college assistant.</h1>
+			<p>Got some questions in mind regarding admissions, placements, courses? I got you.. Just ask me out and I'll explain everything.</p>
+			</div>
+			<div class="meta" style="margin-top:8px;">{{ weather_info }} <span style="margin-left:8px;">Feb 16, 2026</span></div>
+		</header>
+
+		<main>
+			<section class="panel">
+				<h2>FAQ Knowledge Base</h2>
+				<div class="faq">
+					{% for item in faq %}
+					<div class="faq-item">
+						<strong>{{ item.q }}</strong>
+					</div>
+					{% endfor %}
+				</div>
+			</section>
+
+			<section class="panel chat-shell" id="chatSection">
+				<div class="chat-log" id="chatLog">
+					<div class="msg bot">
+						<div class="msg-text">Hi! Ask me about admissions, programs, fees, deadlines, or financial aid.</div>
+						<div class="msg-time" id="initialTime"></div>
+					</div>
+				</div>
+				<form id="chatForm">
+					<textarea id="userInput" placeholder="Type your question here..."></textarea>
+					<div class="input-actions">
+						<button id="micBtn" type="button" title="Speak your question" style="padding:0; background:none; border:none;">
+							<img src="{{ url_for('static', filename='mic.svg') }}" alt="Mic" style="width:28px; height:28px; display:block;" />
+						</button>
+						<button id="sendBtn" type="submit">Send</button>
+					</div>
+				</form>
+				<div class="actions">
+					<div class="meta" id="status"></div>
+				</div>
+			</section>
+		</main>
+
+		<script src="{{ url_for('static', filename='script.js') }}"></script>
+	</body>
+</html>
